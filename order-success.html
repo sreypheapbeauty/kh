@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+  <meta charset="UTF-8">
+  <title>Order Success - SREYPHEAP BEAUTY</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 30px;
+      background: #fff;
+      color: #333;
+      text-align: center;
+    }
+    header {
+      padding: 15px 20px;
+      border-bottom: 3px solid #E3BC9A;
+    }
+    .store-name {
+      font-size: 50px;
+      font-weight: bold;
+      color: #E3BC9A;
+    }
+    h1 {
+      margin-top: 70px;
+      font-size: 45px;
+      color: #E3BC9A;
+    }
+    .order-summary {
+      margin: 30px auto;
+      padding: 50px;
+      max-width: 900px;
+      background: #fdf9f5;
+      border-radius: 30px;
+      border: 2px dashed #E3BC9A;
+      text-align: left;
+    }
+    .order-summary h2 {
+      margin: 10px auto;
+      font-size: 40px;
+      text-align: center;
+      color: #E3BC9A;
+    }
+    .order-summary p, .order-summary li {
+      font-size: 40px;
+      margin: 9px 5;
+    }
+    ul {
+      padding-left: 50px;
+    }
+    .qr-section {
+      margin-top: 30px;
+    }
+    .qr-section img {
+      width: 250px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    .back-home {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 25px;
+      background-color: #E3BC9A;
+      color: #fff;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 40px;
+    }
+    .back-home:hover {
+      background-color: #d1a47b;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="store-name">SREYPHEAP BEAUTY</div>
+  </header>
+
+  <h1>🎉 ការបញ្ជាទិញបានជោគជ័យ!</h1>
+
+  <div class="order-summary">
+    <h2>ព័ត៌មានការបញ្ជាទិញ</h2>
+    <p>👤 ឈ្មោះ: <span id="orderName"></span></p>
+    <p>📞 លេខទូរស័ព្ទ: <span id="orderPhone"></span></p>
+    <p>🏠 អាសយដ្ឋាន: <span id="orderAddress"></span></p>
+    <p>💰 សរុប: <span id="orderTotal"></span></p>
+    <h3>📋 បញ្ជីផលិតផល:</h3>
+    <ul id="orderItems"></ul>
+  </div>
+
+  <a href="index.html" class="back-home">ត្រឡប់ទៅទំព័រដើម</a>
+
+  <script>
+    const order = JSON.parse(localStorage.getItem('lastOrder'));
+    if (order) {
+      document.getElementById('orderName').textContent = order.name;
+      document.getElementById('orderPhone').textContent = order.phone;
+      document.getElementById('orderAddress').textContent = order.address;
+      document.getElementById('orderTotal').textContent = "$" + order.total.toFixed(2);
+
+      const list = document.getElementById('orderItems');
+      order.cart.forEach((item, idx) => {
+        const li = document.createElement('li');
+        li.textContent = `#${idx+1} ➤ ${item.name} x${item.quantity} = $${(item.price * item.quantity).toFixed(2)}`;
+        list.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>

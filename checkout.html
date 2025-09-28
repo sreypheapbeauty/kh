@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>SREYPHEAP BEAUTY</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      color: #E3BC9A;
+      background: white;
+      padding: 30px;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      border-bottom: 3px solid #E3BC9A;
+    }
+    .home-button, .cart-button {
+      color: #E3BC9A;
+      text-decoration: none;
+    }
+    .home-button svg, .cart-button svg {
+      width: 50px;
+      height: 50px;
+    }
+    .store-name {
+      font-size: 50px;
+      font-weight: bold;
+      text-align: center;
+      flex: 1;
+    }
+    .breadcrumb {
+      font-size: 25px;
+      color: #000000;
+      margin: 50px 0;
+      padding-left: 30px;
+    }
+    .breadcrumb a {
+      color: #000;
+      text-decoration: none;
+    }
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    #productNameBreadcrumb {
+      color: #E3BC9A;
+    }
+    .product-container {
+      display: flex;
+      flex-direction: column;
+      color:#E3BC9A;
+      align-items: center;
+      padding: 30px 20px;
+    }
+    .product-image-box img {
+      width: 800px;
+      max-width: 800px;
+      height: auto;
+      margin-bottom: 50px;
+    }
+    .product-details {
+      text-align: center;
+    }
+    .product-details h2 {
+      font-size: 50px;
+      margin: 8px 0;
+    }
+    .product-details p {
+      font-size: 35px;
+      color: #E3BC9A;
+      margin: 8px 0;
+    }
+    .buttons {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    .btn {
+      padding: 30px 60px;
+      border: none;
+      background: #E3BC9A;
+      color: white;
+      cursor: pointer;
+      border-radius: 10px;
+      font-size: 30px;
+    }
+    .btn:hover {
+      opacity: 0.85;
+    }
+    .caption-text {
+      font-family: 'Quicksand', serif;
+      font-size: 30px;
+      color: #000000;
+      background-color: #E3BC9A;
+      padding: 15px;
+      margin-top: 20px;
+      border-left: 5px solid #000000;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      line-height: 1.6;
+    }
+    .follow-us {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px 0;
+      border-top: 3px solid #E3BC9A;
+    }
+    .follow-us h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 35px;
+      margin-bottom: 15px;
+      color: #000000;
+    }
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 35px;
+      margin-top: 10px;
+    }
+    .social-links a {
+      font-size: 50px;
+      color: #000000;
+      transition: color 0.3s ease;
+      text-decoration: none;
+    }
+    .social-links a:hover {
+      color: #000000;
+    }
+    #cartCount {
+      font-size: 25px;
+      font-weight: bold;
+      padding: 7px 14px;
+      background: #E3BC9A;
+      border-radius: 50%;
+      color: white;
+      min-width: 24px;
+      text-align: center;
+      display: inline-block;
+      vertical-align: middle;
+      position: relative;
+      top: -5px;
+      left: 10px;
+    }
+    @media (max-width: 600px) {
+      .product-container {
+        padding: 20px 10px;
+      }
+      .product-details h2 {
+        font-size: 18px;
+      }
+      .product-details p {
+        font-size: 16px;
+      }
+      .btn {
+        font-size: 13px;
+        padding: 8px 16px;
+      }
+      .caption-text {
+        font-size: 14px;
+        padding: 0 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="home-button" title="Home">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <path d="M3 9L12 2l9 7" />
+        <path d="M9 22V12h6v10" />
+        <path d="M21 22H3" />
+      </svg>
+    </a>
+    <h1 class="store-name">SREYPHEAP BEAUTY</h1>
+    <a href="cart.html" class="cart-button" title="View Cart">
+      <span id="cartCount">0</span>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <circle cx="9" cy="21" r="1"></circle>
+        <circle cx="20" cy="21" r="1"></circle>
+        <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"></path>
+      </svg>
+    </a>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb" id="breadcrumb">
+    <a href="index.html">Home</a> / <span id="productNameBreadcrumb">Product</span>
+  </div>
+
+  <div class="product-container">
+    <div class="product-image-box">
+      <img id="selectedProductImage" src="images/default.jpg" alt="Selected Product" />
+    </div>
+    <div class="product-details">
+      <h2 id="selectedProductName">Product Name</h2>
+      <p id="selectedProductPrice">$0.00</p>
+    </div>
+  </div>
+
+  <div class="action-section">
+    <div class="buttons">
+      <button class="btn left">Add to Cart</button>
+      <button class="btn right">Buy Now</button>
+    </div>
+    <p id="selectedProductCaption" class="caption-text"></p>
+    
+    <div class="follow-us">
+      <h3>Follow Us</h3>
+      <div class="social-links">
+        <a href="https://www.facebook.com/share/1BnnhoCEzE/?mibextid=wwXIfr" target="_blank" class="facebook" title="Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.tiktok.com/@sreypheap.beauty?_t=ZS-8yCil3fmirH&_r=1" target="_blank" class="tiktok" title="TikTok">
+          <i class="fab fa-tiktok"></i>
+        </a>
+        <a href="https://t.me/tiger_pheap" target="_blank" class="telegram" title="Telegram">
+          <i class="fab fa-telegram-plane"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Update breadcrumb product name
+    const productName = localStorage.getItem('selectedProductName');
+    if (productName) {
+      document.getElementById('productNameBreadcrumb').textContent = productName;
+    }
+
+    // Show product info
+    const name = localStorage.getItem('selectedProductName');
+    const price = localStorage.getItem('selectedProductPrice');
+    const image = localStorage.getItem('selectedProductImage');
+    const caption = localStorage.getItem('selectedProductCaption');
+
+    if (name) {
+      document.getElementById('selectedProductName').textContent = name;
+    }
+    if (price) {
+      document.getElementById('selectedProductPrice').textContent = '$' + parseFloat(price).toFixed(2);
+    }
+    if (image) {
+      document.getElementById('selectedProductImage').src = image;
+    }
+    if (caption) {
+      document.getElementById('selectedProductCaption').textContent = caption;
+    }
+
+    // Update cart count number
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const cartCountEl = document.getElementById('cartCount');
+      if (cartCountEl) {
+        cartCountEl.textContent = totalQty;
+        cartCountEl.style.display = totalQty > 0 ? 'inline' : 'none';
+      }
+    }
+
+    // Add item to cart
+    function addToCart(name, price, image) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const index = cart.findIndex(item => item.name === name);
+      if (index > -1) {
+        cart[index].quantity += 1;
+      } else {
+        cart.push({ name, price, image, quantity: 1 });
+      }
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
+    }
+
+    updateCartCount();
+
+    // Add to Cart button event
+    document.querySelector('.btn.left').addEventListener('click', () => {
+      if (!name || !price || !image) {
+        alert('Product data missing!');
+        return;
+      }
+      addToCart(name, parseFloat(price), image);
+      alert('Added to cart!');
+    });
+
+    // Buy Now button event
+    document.querySelector('.btn.right').addEventListener('click', () => {
+      if (!name || !price || !image) {
+        alert('Product data missing!');
+        return;
+      }
+      addToCart(name, parseFloat(price), image);
+      alert('Added to cart! Redirecting to cart...');
+      window.location.href = 'cart.html';
+    });
+  </script>
+</body>
+</html>

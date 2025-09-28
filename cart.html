@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Your Cart - SREYPHEAP BEAUTY</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 30px;
+      background-color: white;
+      color: #333;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      border-bottom: 3px solid #E3BC9A;
+      background: #fff;
+    }
+
+    .store-name {
+      font-size: 50px;
+      font-weight: bold;
+      color: #E3BC9A;
+      flex: 1;
+      text-align: center;
+    }
+
+    .cart-container {
+      margin-top: 40px;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      padding: 20px 0;
+    }
+
+    .cart-item img {
+      width: 120px;
+      height: auto;
+      margin-right: 20px;
+      border-radius: 15px;
+    }
+
+    .item-info {
+      flex-grow: 1;
+    }
+
+    .item-info h2 {
+      margin: 0 0 10px;
+      font-size: 30px;
+      color: #000000;
+    }
+
+    .item-info p {
+      margin: 5px 0;
+      font-size: 20px;
+      color: #000000;
+    }
+
+    input.quantity-input {
+      width: 60px;
+      padding: 6px;
+      font-size: 30px;
+      border-radius: 5px;
+      border: 1px solid #E3BC9A;
+      text-align: center;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+
+    .item-info button {
+      margin: 0 5px 0 0;
+      padding: 8px 12px;
+      font-size: 18px;
+      background-color: #E3BC9A;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.1s ease;
+    }
+
+    .item-info button:hover {
+      background-color: #d2a578;
+    }
+
+    .total-price {
+      font-size: 30px;
+      margin-top: 20px;
+      text-align: right;
+      font-weight: bold;
+      color: #E3BC9A;
+    }
+    
+    .pay-button {
+      display: inline-block;
+      background-color: #E3BC9A;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 18px;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    .pay-button:hover {
+      background-color: #d1a47b;
+    }
+
+    .checkout-section {
+      margin: 40px auto 0;
+      padding: 20px;
+      max-width: 400px;
+      background-color: #fdf9f5;
+      border-radius: 10px;
+      border: 2px dashed #E3BC9A;
+      box-shadow: 0 4px 8px rgba(227, 188, 154, 0.3);
+      text-align: center;
+    }
+
+    .checkout-section h2, .checkout-section h3 {
+      color: #E3BC9A;
+      margin-bottom: 15px;
+    }
+
+    .checkout-section label {
+      font-size: 18px;
+      display: block;
+      margin-bottom: 8px;
+      text-align: left;
+      color: #333;
+    }
+
+    .checkout-section input[type="tel"],
+    .checkout-section input[type="text"] {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      width: 100%;
+      box-sizing: border-box;
+      margin-bottom: 20px;
+    }
+
+    .checkout-section .qr-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .checkout-section button {
+      background-color: #E3BC9A;
+      color: white;
+      padding: 12px 0;
+      width: 100%;
+      font-size: 20px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.1s ease;
+    }
+
+    .checkout-section button:hover {
+      background-color: #d2a578;
+    }
+
+    .empty {
+      text-align: center;
+      font-size: 20px;
+      color: #999;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 600px) {
+      .store-name {
+        font-size: 30px;
+      }
+      .item-info h2 {
+        font-size: 22px;
+      }
+      .item-info p {
+        font-size: 16px;
+      }
+      .checkout-section {
+        max-width: 100%;
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" style="color:#E3BC9A; text-decoration:none; font-size: 36px;">← Home</a>
+    <div class="store-name">SREYPHEAP BEAUTY</div>
+    <div></div>
+  </header>
+
+  <h1>Your Shopping Cart</h1>
+
+  <div class="cart-container" id="cartContainer"></div>
+  <div class="total-price" id="totalPrice">Total: $0.00</div>
+
+  <div class="checkout-section">
+    <h2>Confirm Your Order</h2>
+    
+    <label for="customerName">ឈ្មោះអតិថិជន:</label>
+    <input type="text" id="customerName" placeholder="បញ្ចូលឈ្មោះពេញរបស់អ្នក" required />
+    
+    <label for="phone">លេខទូរស័ព្ទ:</label>
+    <input type="tel" id="phone" placeholder="បញ្ចូលលេខទូរស័ព្ទរបស់អ្នក" required />
+
+    <label for="address">ទីតាំង:</label>
+    <input type="text" id="address" placeholder="បញ្ចូលទីតាំងរបស់អ្នក" required />
+    
+    <div class="payment-section">
+      <h3>លេខវេលុយ 092 302 461</h3>
+      <h3>បង់ប្រាក់តាម ABA / KHQR</h3>
+      <h3>លេខគណនី 013 417 402<br>TIM SREYPHEAP</h3>
+      
+      <img src="images/IMG_1853.jpeg" alt="KHQR Payment" style="width: 250px; border: 1px solid #ccc; border-radius: 8px;" />
+      <p>ស្កេន QR Code ដើម្បីបង់ប្រាក់</p>
+      <p>បន្ទាប់ពីបង់ប្រាក់ សូមចុច "Confirm & Place Order"</p>
+    </div>
+  
+    <button onclick="confirmOrder()">Confirm & Place Order</button>
+  </div>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartContainer = document.getElementById('cartContainer');
+    const totalPriceEl = document.getElementById('totalPrice');
+    
+    function renderCart() {
+      cartContainer.innerHTML = '';
+      let total = 0;
+      
+      if (cart.length === 0) {
+        cartContainer.innerHTML = '<div class="empty">Your cart is empty.</div>';
+        totalPriceEl.textContent = 'Total: $0.00';
+        return;
+      }
+      
+      cart.forEach((item, index) => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'cart-item';
+        itemDiv.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" />
+          <div class="item-info">
+            <h2>${item.name}</h2>
+            <p>Price: $${item.price.toFixed(2)}</p>
+            <p>
+              Quantity:
+              <div class="quantity-controls">
+                <button onclick="changeQuantity(${index}, -1)">➖</button>
+                <input type="number" class="quantity-input" min="1" value="${item.quantity}" onchange="manualChangeQuantity(${index}, this.value)" />
+                <button onclick="changeQuantity(${index}, 1)">➕</button>
+                <button onclick="removeItem(${index})"> Remove</button>
+              </div>
+            </p>
+          </div>
+        `;
+        cartContainer.appendChild(itemDiv);
+      });
+      
+      totalPriceEl.textContent = 'Total: $' + total.toFixed(2) + ' (= ' + (total * 4200).toLocaleString() + ' ៛)';
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+    
+    function changeQuantity(index, delta) {
+      cart[index].quantity += delta;
+      if (cart[index].quantity < 1) {
+        cart.splice(index, 1);
+      }
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+    }
+    
+    function manualChangeQuantity(index, value) {
+      let newQty = parseInt(value);
+      if (isNaN(newQty) || newQty < 1) {
+        alert("Please enter a valid quantity (1 or more).");
+        renderCart();
+        return;
+      }
+      cart[index].quantity = newQty;
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+    }
+    
+    function removeItem(index) {
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+    }
+    
+    function sendTelegramOrder(name, phone, address) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      if (cart.length === 0) return;
+      
+      let productMessage = cart.map(item => {
+        return `📦 ${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}`;
+      }).join('\n');
+      
+      const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      
+      const fullMessage = `🛒 ការបញ្ជាទិញថ្មីមួយ!\n` +
+        `👤 ឈ្មោះអតិថិជន៖ ${name}\n` +
+        `📞 លេខទូរស័ព្ទ៖ ${phone}\n` +
+        `🏠 អាសយដ្ឋាន៖ ${address}\n` +
+        `💰 សរុប៖ $${total.toFixed(2)} (≈ ${(total * 4200).toLocaleString()} ៛)\n\n` +
+        `📋 បញ្ជីផលិតផល:\n${productMessage}`;
+      
+      const token = '7834966948:AAGoNiOah7s16-wEZwNJWF125FUxF4-b1G8';
+      const chatId = '-4840764659';
+      
+      fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(fullMessage)}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.ok) {
+            alert("🎉 ការបញ្ជាទិញបានផ្ញើទៅ Telegram!");
+          } else {
+            alert("❌ មិនអាចផ្ញើសារទៅ Telegram បានទេ។");
+            console.error(data);
+          }
+        })
+        .catch(err => {
+          console.error("Telegram API error:", err);
+          alert("⚠️ ការតភ្ជាប់មានបញ្ហា ប៉ុន្តែការបញ្ជាទិញនៅតែត្រូវបានរក្សាទុក។");
+        });
+    }
+    
+   function confirmOrder() {
+     const name = document.getElementById('customerName').value.trim();
+     const phone = document.getElementById('phone').value.trim();
+     const address = document.getElementById('address').value.trim();
+    const phoneRegex = /^0\d{8,9}$/;
+
+    if (!name || name.length < 2) {
+        alert('សូមបញ្ចូលឈ្មោះអតិថិជន!');
+        return;
+    }
+
+    if (!phoneRegex.test(phone)) {
+        alert('សូមបញ្ចូលលេខទូរស័ព្ទត្រឹមត្រូវ (ចាប់ផ្ដើមដោយ 0)!');
+        return;
+    }
+
+    if (address.length < 5) {
+        alert('សូមបញ្ចូលអាសយដ្ឋានត្រឹមត្រូវ!');
+        return;
+    }
+
+    if (cart.length === 0) {
+        alert("កន្ត្រកទំនិញទទេ!");
+        return;
+    }
+
+    // ✅ Send order to Telegram
+    sendTelegramOrder(name, phone, address);
+
+    // ✅ Save order summary to localStorage
+    const orderSummary = {
+        name: name,
+        phone: phone,
+        address: address,
+        cart: cart,
+        total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+    };
+    localStorage.setItem('lastOrder', JSON.stringify(orderSummary));
+
+    // 🧹 Clear cart & Redirect
+    localStorage.removeItem('cart');
+    setTimeout(() => {
+        window.location.href = 'order-success.html';
+    }, 2000);
+}
+
+// ✅ Auto run when page loads
+window.onload = renderCart;
+</script>
