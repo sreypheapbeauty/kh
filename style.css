@@ -172,7 +172,7 @@ html {
 
 .hero-slider img {
   width: 979px;
-  height: 370px;
+  height: 475px;
   flex-shrink: 0;
   scroll-snap-align: start;
   object-fit: cover;
