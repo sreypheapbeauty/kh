@@ -4,20 +4,114 @@
   <meta charset="UTF-8">
   <title>SREYPHEAP BEAUTY</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* 🌸 Fade-in smooth animation */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-on-load {
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.3s; }
+    .delay-3 { animation-delay: 0.5s; }
+
+    /* Header Background (ស្រមោលរូបស្អាត淡淡) */
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      border-bottom: 3px solid #E3BC9A;
+      background: linear-gradient(#E3BC9A(255,255,255,0.9), #E3BC9A(255,255,255,0.9)),
+                  url('images/header-bg.jpg') center/cover no-repeat;
+      background-blend-mode: lighten;
+    }
+    
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
+url('images/header-bg.jpg') center/cover no-repeat;
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 2000%;
+      object-fit: cover;
+    }
+
+    .store-info {
+      text-align: center;
+      flex: 1;
+    }
+
+    .store-title {
+      font-size: 50px;
+      color: #FFFFFF;
+      margin: 0;
+    }
+
+    .store-subtext {
+      color: #FFFFFF;
+      font-size: 20px;
+    }
+
+    .search-container {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .search-input {
+      padding: 8px 10px;
+      border-radius: 5px;
+      border: 1px solid #E3BC9A;
+      font-size: 14px;
+    }
+
+    .search-btn {
+      background-color: #000000;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .search-btn:hover {
+      background-color: #d1a47b;
+    }
+
+    .home-button {
+      color: #E3BC9A;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+    }
+  </style>
 </head>
 <body>
   <!-- Header Section -->
-  <header class="top-header">
-    <div class="header-left">
+  <header class="top-header animate-on-load delay-1">
+    <div class="header-left animate-on-load delay-1">
       <img src="images/a.jpeg" alt="Logo" class="logo" />
     </div>
     
-    <div class="store-info">
+    <div class="store-info animate-on-load delay-2">
       <h1 class="store-title">SREYPHEAP BEAUTY</h1>
       <span class="store-subtext">You're never too old to look young</span>
     </div>
 
-    <div class="search-container">
+    <div class="search-container animate-on-load delay-3">
       <input
         type="text"
         id="searchInput"
