@@ -4,12 +4,19 @@
   <meta charset="UTF-8">
   <title>SREYPHEAP BEAUTY</title>
   <link rel="stylesheet" href="style.css">
+
   <style>
-    /* 🌸 Fade-in smooth animation */
-    @keyframes fadeInUp {
+    /* 🌸 ===== PAGE ANIMATION CONTROL ===== */
+    :root {
+      --fade-duration: 1.50s;    /* ⏱ កែរល្បឿន fade (ex: 1s, 2s) */
+      --fade-distance: 150px;    /* ⬆ កែចម្ងាយបង្រួម (ex: 10px, 50px) */
+      --font-color: #FFFFFF;       /* 🖋 ពណ៌អក្សរ */
+    }
+
+    @keyframes fadeInSmooth {
       0% {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(var(--fade-distance));
       }
       100% {
         opacity: 1;
@@ -17,51 +24,56 @@
       }
     }
 
-    .animate-on-load {
-      opacity: 0;
-      animation: fadeInUp 1.50s ease forwards;
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      animation: fadeInSmooth var(--fade-duration) ease-in-out;
+      background-color: #FFDFC36B;
+      color: var(--font-color);
     }
 
-    .delay-1 { animation-delay: 0.3s; }
-    .delay-2 { animation-delay: 0.5s; }
-    .delay-3 { animation-delay: 0.8s; }
-
-    /* Header Background (ស្រមោលរូបស្អាត淡淡) */
-    .top-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 30px;
-      border-bottom: 3px solid #E3BC9A;
-      background: linear-gradient(#E3BC9A(255,255,255,0.9), #E3BC9A(255,255,255,0.9)),
-                  url('images/header-bg.jpg') center/cover no-repeat;
-      background-blend-mode: lighten;
-    }
-    
-    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
-url('images/header-bg.jpg') center/cover no-repeat;
+    /* ===== HEADER ===== */
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px 50px;
+  border-bottom: 0px solid var(--theme-color);
+  
+  /* ✅ រូបច្បាស់ពេញលេញ (គ្មានស្រមោល ឬថ្លា) */
+  background: url('images/IMG_header1.jpeg') center/cover no-repeat;
+  background-blend-mode: normal;
+}
 
     .logo {
-      width: 80px;
-      height: 80px;
-      border-radius: 2000%;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
       object-fit: cover;
     }
 
     .store-info {
       text-align: center;
-      flex: 1;
+      flex: 0;
     }
 
     .store-title {
-      font-size: 50px;
-      color: #FFFFFF;
+      font-size: 70px;
+      color: var(--font-color);
       margin: 0;
+      font-weight: 600;
+      letter-spacing: 1px;
+      transition: transform 1.50s ease;
+    }
+
+    /* ✨ optional hover animation on title */
+    .store-title:hover {
+      transform: scale(1.50);
     }
 
     .store-subtext {
       color: #FFFFFF;
-      font-size: 20px;
+      font-size: 25px;
     }
 
     .search-container {
@@ -71,31 +83,81 @@ url('images/header-bg.jpg') center/cover no-repeat;
     }
 
     .search-input {
-      padding: 8px 10px;
+      padding: 10px 15px;
       border-radius: 5px;
-      border: 1px solid #E3BC9A;
-      font-size: 14px;
+      border: 1px solid var(--theme-color);
+      font-size: 14#FFFFFFpx;
+      outline: none;
     }
 
     .search-btn {
-      background-color: #000000;
-      color: white;
+      background-color: #FFFFFF;
+      color: #E3BC9A;
       border: none;
-      padding: 8px 16px;
+      padding: 10px 25px;
       border-radius: 5px;
       cursor: pointer;
-      transition: background-color 0.2s ease;
+      transition: background-color 0.3s ease;
     }
 
     .search-btn:hover {
-      background-color: #d1a47b;
+      background-color: var(--theme-color);
+      color: #000;
     }
 
     .home-button {
-      color: #E3BC9A;
+      color: var(--theme-color);
       text-decoration: none;
       font-weight: bold;
       font-size: 16px;
+      transition: color 0.5s ease;
+    }
+
+    .home-button:hover {
+      color: #000;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero-container {
+      animation: fadeInSmooth var(--fade-duration) ease-in-out;
+    }
+
+    .hero-slider img {
+      width: 980px;
+      height: auto;
+      display: block;
+    }
+
+    .shop-now-button {
+      display: inline-block;
+      margin: 20px auto;
+      background-color: var(--theme-color);
+      color: #FFFFFF;
+      background-color:#E3BC9A;
+      padding: 10px 25px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .shop-now-button:hover {
+      background-color:#E3BC9A;
+      color: #fff;
+      transform: scale(1.50);
+    }
+
+    /* ===== PRODUCTS SECTION ===== */
+    .products {
+      text-align: center;
+      color: #000000
+      padding: 50px 0px;
+    }
+
+    .products h2 {
+      font-size: 28px;
+      color: #000000
+      animation: fadeInSmooth 1.50s ease-in-out;
     }
   </style>
 </head>
