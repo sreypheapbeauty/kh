@@ -1299,18 +1299,26 @@ BOJ PRO TIP:
   
   // Search functionality
   function searchProducts() {
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    const productCards = document.querySelectorAll('.product-card');
+  const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+  const productCards = document.querySelectorAll('.product-card');
+  let hasResult = false;
+  
+  productCards.forEach(card => {
+    const name = card.querySelector('.product-name').textContent.toLowerCase();
+    const match = name.includes(searchTerm);
+    card.style.display = match ? 'block' : 'none';
+    if (match) hasResult = true;
+  });
+  
+  if (hasResult) {
+    document.body.classList.add('search-active');
     
-    productCards.forEach(card => {
-      const productName = card.querySelector('.product-name').textContent.toLowerCase();
-      if (productName.includes(searchTerm)) {
-        card.style.display = 'block';
-      } else {
-        card.style.display = 'none';
-      }
+    document.querySelector('.products').scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
     });
   }
+}
   
   // Enter key search
   document.getElementById('searchInput')?.addEventListener('keypress', function(e) {
