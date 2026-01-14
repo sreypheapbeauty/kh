@@ -37,13 +37,13 @@
       display: flex;
       align-items: center;
       border-bottom: 1px solid #ddd;
-      padding: 20px 0;
+      padding: 30px 10px;
     }
 
     .cart-item img {
-      width: 120px;
+      width: 200px;
       height: auto;
-      margin-right: 20px;
+      margin-right: 50px;
       border-radius: 15px;
     }
 
@@ -53,7 +53,7 @@
 
     .item-info h2 {
       margin: 0 0 10px;
-      font-size: 30px;
+      font-size: 40px;
       color: #000000;
     }
 
@@ -117,10 +117,10 @@
 
     .checkout-section {
       margin: 40px auto 0;
-      padding: 20px;
-      max-width: 400px;
+      padding: 200px;
+      max-width: 4000px;
       background-color: #fdf9f5;
-      border-radius: 10px;
+      border-radius: 100px;
       border: 2px dashed #E3BC9A;
       box-shadow: 0 4px 8px rgba(227, 188, 154, 0.3);
       text-align: center;
@@ -128,11 +128,12 @@
 
     .checkout-section h2, .checkout-section h3 {
       color: #E3BC9A;
+      font-size: 35px;
       margin-bottom: 15px;
     }
 
     .checkout-section label {
-      font-size: 18px;
+      font-size: 30px;
       display: block;
       margin-bottom: 8px;
       text-align: left;
@@ -141,34 +142,54 @@
 
     .checkout-section input[type="tel"],
     .checkout-section input[type="text"] {
-      padding: 10px;
-      border-radius: 5px;
+      padding: 30px;
+      border-radius: 50px;
       border: 1px solid #ccc;
-      font-size: 16px;
+      font-size: 25px;
       width: 100%;
       box-sizing: border-box;
       margin-bottom: 20px;
     }
 
     .checkout-section .qr-image {
-      max-width: 100%;
+      max-width: 1000%;
       height: auto;
       border-radius: 10px;
       margin-bottom: 20px;
     }
 
-    .checkout-section button {
-      background-color: #E3BC9A;
-      color: white;
-      padding: 12px 0;
-      width: 100%;
-      font-size: 20px;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.1s ease;
-    }
+.checkout-section button {
+  background-color: #E3BC9A;
+  color: white;
+
+  width: 100%;          /* ✅ មិនលើស container */
+  max-width: 3600px;     /* ✅ ទំហំស្អាត */
+  padding: 30px 0;      /* ✅ ប៊ូតុងធំសម */
+  
+  font-size: 30px;      /* ✅ អានងាយ */
+  font-weight: bold;
+
+  border: none;
+  border-radius: 12px;  /* ✅ មូលស្អាត */
+  cursor: pointer;
+
+  display: block;
+  margin: 20px auto 0;  /* ✅ កណ្ដាល */
+
+  transition: background-color 0.15s ease,
+              transform 0.12s ease;
+}
+
+/* 🟢 Hover effect (ទន់ ស្អាត) */
+.checkout-section button:hover {
+  background-color: #d2a578;
+  transform: scale(1.02);
+}
+
+/* 🟠 Click effect */
+.checkout-section button:active {
+  transform: scale(0.98);
+}
 
     .checkout-section button:hover {
       background-color: #d2a578;
@@ -176,7 +197,7 @@
 
     .empty {
       text-align: center;
-      font-size: 20px;
+      font-size: 50px;
       color: #999;
       margin-top: 50px;
     }
@@ -228,7 +249,7 @@
       <h3>បង់ប្រាក់តាម ABA / KHQR</h3>
       <h3>លេខគណនី 013 417 402<br>TIM SREYPHEAP</h3>
       
-      <img src="images/IMG_1853.jpeg" alt="KHQR Payment" style="width: 250px; border: 1px solid #ccc; border-radius: 8px;" />
+      <img src="images/IMG_1853.jpeg" alt="KHQR Payment" style="width: 400px; border: 1px solid #ccc; border-radius: 8px;" />
       <p>ស្កេន QR Code ដើម្បីបង់ប្រាក់</p>
       <p>បន្ទាប់ពីបង់ប្រាក់ សូមចុច "Confirm & Place Order"</p>
     </div>
@@ -236,159 +257,136 @@
     <button onclick="confirmOrder()">Confirm & Place Order</button>
   </div>
 
-  <script>
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const cartContainer = document.getElementById('cartContainer');
-    const totalPriceEl = document.getElementById('totalPrice');
-    
-    function renderCart() {
-      cartContainer.innerHTML = '';
-      let total = 0;
-      
-      if (cart.length === 0) {
-        cartContainer.innerHTML = '<div class="empty">Your cart is empty.</div>';
-        totalPriceEl.textContent = 'Total: $0.00';
-        return;
-      }
-      
-      cart.forEach((item, index) => {
-        const itemTotal = item.price * item.quantity;
-        total += itemTotal;
-        
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'cart-item';
-        itemDiv.innerHTML = `
-          <img src="${item.image}" alt="${item.name}" />
-          <div class="item-info">
-            <h2>${item.name}</h2>
-            <p>Price: $${item.price.toFixed(2)}</p>
-            <p>
-              Quantity:
-              <div class="quantity-controls">
-                <button onclick="changeQuantity(${index}, -1)">➖</button>
-                <input type="number" class="quantity-input" min="1" value="${item.quantity}" onchange="manualChangeQuantity(${index}, this.value)" />
-                <button onclick="changeQuantity(${index}, 1)">➕</button>
-                <button onclick="removeItem(${index})"> Remove</button>
-              </div>
-            </p>
-          </div>
-        `;
-        cartContainer.appendChild(itemDiv);
-      });
-      
-      totalPriceEl.textContent = 'Total: $' + total.toFixed(2) + ' (= ' + (total * 4200).toLocaleString() + ' ៛)';
-      localStorage.setItem('cart', JSON.stringify(cart));
-    }
-    
-    function changeQuantity(index, delta) {
-      cart[index].quantity += delta;
-      if (cart[index].quantity < 1) {
-        cart.splice(index, 1);
-      }
-      localStorage.setItem('cart', JSON.stringify(cart));
-      renderCart();
-    }
-    
-    function manualChangeQuantity(index, value) {
-      let newQty = parseInt(value);
-      if (isNaN(newQty) || newQty < 1) {
-        alert("Please enter a valid quantity (1 or more).");
-        renderCart();
-        return;
-      }
-      cart[index].quantity = newQty;
-      localStorage.setItem('cart', JSON.stringify(cart));
-      renderCart();
-    }
-    
-    function removeItem(index) {
-      cart.splice(index, 1);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      renderCart();
-    }
-    
-    function sendTelegramOrder(name, phone, address) {
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      if (cart.length === 0) return;
-      
-      let productMessage = cart.map(item => {
-        return `📦 ${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}`;
-      }).join('\n');
-      
-      const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-      
-      const fullMessage = `🛒 ការបញ្ជាទិញថ្មីមួយ!\n` +
-        `👤 ឈ្មោះអតិថិជន៖ ${name}\n` +
-        `📞 លេខទូរស័ព្ទ៖ ${phone}\n` +
-        `🏠 អាសយដ្ឋាន៖ ${address}\n` +
-        `💰 សរុប៖ $${total.toFixed(2)} (≈ ${(total * 4200).toLocaleString()} ៛)\n\n` +
-        `📋 បញ្ជីផលិតផល:\n${productMessage}`;
-      
-      const token = '7834966948:AAGoNiOah7s16-wEZwNJWF125FUxF4-b1G8';
-      const chatId = '-4840764659';
-      
-      fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(fullMessage)}`)
-        .then(res => res.json())
-        .then(data => {
-          if (data.ok) {
-            alert("🎉 ការបញ្ជាទិញបានផ្ញើទៅ Telegram!");
-          } else {
-            alert("❌ មិនអាចផ្ញើសារទៅ Telegram បានទេ។");
-            console.error(data);
-          }
-        })
-        .catch(err => {
-          console.error("Telegram API error:", err);
-          alert("⚠️ ការតភ្ជាប់មានបញ្ហា ប៉ុន្តែការបញ្ជាទិញនៅតែត្រូវបានរក្សាទុក។");
-        });
-    }
-    
-   function confirmOrder() {
-     const name = document.getElementById('customerName').value.trim();
-     const phone = document.getElementById('phone').value.trim();
-     const address = document.getElementById('address').value.trim();
-    const phoneRegex = /^0\d{8,9}$/;
+<script>
+  const SHIPPING_FEE = 2.00; // 🚚 ថ្លៃដឹកជញ្ជូន (កែដោយដៃ)
 
-    if (!name || name.length < 2) {
-        alert('សូមបញ្ចូលឈ្មោះអតិថិជន!');
-        return;
-    }
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const cartContainer = document.getElementById('cartContainer');
+  const totalPriceEl = document.getElementById('totalPrice');
 
-    if (!phoneRegex.test(phone)) {
-        alert('សូមបញ្ចូលលេខទូរស័ព្ទត្រឹមត្រូវ (ចាប់ផ្ដើមដោយ 0)!');
-        return;
-    }
-
-    if (address.length < 5) {
-        alert('សូមបញ្ចូលអាសយដ្ឋានត្រឹមត្រូវ!');
-        return;
-    }
+  function renderCart() {
+    cartContainer.innerHTML = '';
+    let subtotal = 0;
 
     if (cart.length === 0) {
-        alert("កន្ត្រកទំនិញទទេ!");
-        return;
+      cartContainer.innerHTML = '<div class="empty">Your cart is empty.</div>';
+      totalPriceEl.textContent = 'Total: $0.00';
+      return;
     }
 
-    // ✅ Send order to Telegram
+    cart.forEach((item, index) => {
+      const itemTotal = item.price * item.quantity;
+      subtotal += itemTotal;
+
+      const itemDiv = document.createElement('div');
+      itemDiv.className = 'cart-item';
+      itemDiv.innerHTML = `
+        <img src="${item.image}" alt="${item.name}" />
+        <div class="item-info">
+          <h2>${item.name}</h2>
+          <p>Price: $${item.price.toFixed(2)}</p>
+          <p>
+            Quantity:
+            <div class="quantity-controls">
+              <button onclick="changeQuantity(${index}, -1)">➖</button>
+              <input type="number" class="quantity-input" min="1" value="${item.quantity}"
+                onchange="manualChangeQuantity(${index}, this.value)" />
+              <button onclick="changeQuantity(${index}, 1)">➕</button>
+              <button onclick="removeItem(${index})">Remove</button>
+            </div>
+          </p>
+        </div>
+      `;
+      cartContainer.appendChild(itemDiv);
+    });
+
+    const grandTotal = subtotal + SHIPPING_FEE;
+
+    totalPriceEl.innerHTML = `
+      Subtotal: $${subtotal.toFixed(2)} <br>
+      Shipping: $${SHIPPING_FEE.toFixed(2)} <br>
+      <strong>Total: $${grandTotal.toFixed(2)} (= ${(grandTotal * 4100).toLocaleString()} ៛)</strong>
+    `;
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+
+  function changeQuantity(index, delta) {
+    cart[index].quantity += delta;
+    if (cart[index].quantity < 1) {
+      cart.splice(index, 1);
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    renderCart();
+  }
+
+  function manualChangeQuantity(index, value) {
+    let newQty = parseInt(value);
+    if (isNaN(newQty) || newQty < 1) {
+      alert("Please enter a valid quantity (1 or more).");
+      renderCart();
+      return;
+    }
+    cart[index].quantity = newQty;
+    localStorage.setItem('cart', JSON.stringify(cart));
+    renderCart();
+  }
+
+  function removeItem(index) {
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    renderCart();
+  }
+
+  function sendTelegramOrder(name, phone, address) {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (cart.length === 0) return;
+
+    let productMessage = cart.map(item =>
+      `📦 ${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}`
+    ).join('\n');
+
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const total = subtotal + SHIPPING_FEE;
+
+    const fullMessage =
+      `🛒 ការបញ្ជាទិញថ្មី!\n` +
+      `👤 ឈ្មោះ៖ ${name}\n` +
+      `📞 លេខទូរស័ព្ទ៖ ${phone}\n` +
+      `🏠 អាសយដ្ឋាន៖ ${address}\n` +
+      `💰 Subtotal៖ $${subtotal.toFixed(2)}\n` +
+      `🚚 Shipping៖ $${SHIPPING_FEE.toFixed(2)}\n` +
+      `💵 Total៖ $${total.toFixed(2)} (≈ ${(total * 4100).toLocaleString()} ៛)\n\n` +
+      `📋 បញ្ជីទំនិញ:\n${productMessage}`;
+
+    const token = '7834966948:AAGoNiOah7s16-wEZwNJWF125FUxF4-b1G8';
+    const chatId = '-4840764659';
+
+    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(fullMessage)}`);
+  }
+
+  function confirmOrder() {
+    const name = document.getElementById('customerName').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const phoneRegex = /^0\d{8,9}$/;
+
+    if (!name || name.length < 2) return alert('សូមបញ្ចូលឈ្មោះ!');
+    if (!phoneRegex.test(phone)) return alert('លេខទូរស័ព្ទមិនត្រឹមត្រូវ!');
+    if (address.length < 5) return alert('សូមបញ្ចូលអាសយដ្ឋាន!');
+    if (cart.length === 0) return alert('កន្ត្រកទំនិញទទេ!');
+
     sendTelegramOrder(name, phone, address);
 
-    // ✅ Save order summary to localStorage
-    const orderSummary = {
-        name: name,
-        phone: phone,
-        address: address,
-        cart: cart,
-        total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)
-    };
-    localStorage.setItem('lastOrder', JSON.stringify(orderSummary));
+    localStorage.setItem('lastOrder', JSON.stringify({
+      name, phone, address,
+      cart,
+      total: cart.reduce((s, i) => s + (i.price * i.quantity), 0) + SHIPPING_FEE
+    }));
 
-    // 🧹 Clear cart & Redirect
     localStorage.removeItem('cart');
-    setTimeout(() => {
-        window.location.href = 'order-success.html';
-    }, 2000);
-}
+    setTimeout(() => location.href = 'order-success.html', 2000);
+  }
 
-// ✅ Auto run when page loads
-window.onload = renderCart;
+  window.onload = renderCart;
 </script>
